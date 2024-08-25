@@ -1,38 +1,36 @@
-import { Injectable, Res } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { createConnection } from 'mysql2/promise';
-import { trace } from '@opentelemetry/api';
 import axios from 'axios';
-
-const redis = require("redis");
-
+import * as redis from 'redis';
 
 const redisClient = redis.createClient({
-  url: "redis://redis:6379",
+  url: 'redis://localhost:6379',
 });
 redisClient.connect().catch((err) => {
   if (err) {
     if (process.env.CUBE_DOCKER_COMPOSE) throw err;
   } else {
-    console.log("redis connected!");
+    console.log('redis connected!');
   }
 });
 
 @Injectable()
 export class AppService {
   private readonly mysqlClient;
-  cacheManager: any;
 
   constructor() {
     this.mysqlClient = createConnection({
-      host: 'mysql',
+      host: 'localhost',
       user: 'root',
       password: 'root',
       database: 'test',
     });
 
-    this.mysqlClient.then(() => console.log('MySQL connected!')).catch((err) => {
-      if (process.env.CUBE_DOCKER_COMPOSE) throw err;
-    });
+    this.mysqlClient
+      .then(() => console.log('MySQL connected!'))
+      .catch((err) => {
+        if (process.env.CUBE_DOCKER_COMPOSE) throw err;
+      });
   }
 
   async getHello(): Promise<string> {
@@ -59,15 +57,6 @@ export class AppService {
 
   async callRedis(): Promise<string> {
     await redisClient.set('foo', 'bar');
-    return ('Redis called');
-  }
-
-  errorHandler(err ,req, res, next) {
-    const span = trace.getActiveSpan();
-    if (span) {
-      span.recordException(err);
-    }
-    next (err); 
+    return 'Redis called';
   }
 }
-

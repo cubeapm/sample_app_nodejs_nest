@@ -1,7 +1,7 @@
-import { Controller, Get, Param, UseFilters } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('/')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -20,7 +20,7 @@ export class AppController {
     return this.appService.throwError();
   }
 
-  @Get('/api')
+  @Get('api')
   async handleApiCall(): Promise<string> {
     return this.appService.callApi();
   }
