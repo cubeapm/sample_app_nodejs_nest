@@ -4,7 +4,7 @@ import axios from 'axios';
 import * as redis from 'redis';
 
 const redisClient = redis.createClient({
-  url: 'redis://localhost:6379',
+  url: 'redis://redis:6379',
 });
 redisClient.connect().catch((err) => {
   if (err) {
@@ -20,7 +20,7 @@ export class AppService {
 
   constructor() {
     this.mysqlClient = createConnection({
-      host: 'localhost',
+      host: 'mysql',
       user: 'root',
       password: 'root',
       database: 'test',
