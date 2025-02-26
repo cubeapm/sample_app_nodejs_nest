@@ -10,6 +10,18 @@ Refer the project README below for more details.
 
 ---
 
+## Troubleshooting
+
+If the app does not show up in CubeAPM after integration is done, add the below environment variables to check New Relic agent logs.
+
+```shell
+# Print New Relic agent logs on screen
+NEW_RELIC_LOG=stdout
+
+# Set New Relic agent log level to debug if needed to see detailed logs
+#NEW_RELIC_LOG_LEVEL=debug
+```
+
 # NodeJS NestJS Instrumentation
 
 This is a sample app to demonstrate how to instrument NodeJS NestJS app with **New Relic** and **OpenTelemetry**. It contains source code for the NestJS app which interacts with various services like Redis, MySQL, etc. to demonstrate tracing for these services. This repository has a docker compose file to set up all these services conveniently.
