@@ -23,14 +23,6 @@ NestJS app will now be available at `http://localhost:3000`.
 
 The app has various API endpoints to demonstrate integrations with Redis, MySQL, etc. Check out [src/app.controller.ts](src/app.controller.ts) for the list of API endpoints.
 
-## Running without Docker
-
-The app can be run with the following command
-
-```
-npm run start
-```
-
 # Contributing
 
 Please feel free to raise PR for any enhancements - additional service integrations, library version updates, documentation updates, etc.
