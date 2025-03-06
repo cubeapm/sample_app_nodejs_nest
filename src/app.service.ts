@@ -1,3 +1,4 @@
+import 'elastic-apm-node/start'
 import { Injectable } from '@nestjs/common';
 import { createConnection } from 'mysql2/promise';
 import axios from 'axios';
