@@ -1,3 +1,4 @@
+const newrelic = require("newrelic");
 import { Injectable } from '@nestjs/common';
 import { createConnection } from 'mysql2/promise';
 import axios from 'axios';
@@ -46,6 +47,8 @@ export class AppService {
   }
 
   async callApi(): Promise<string> {
+    // https://docs.newrelic.com/docs/data-apis/custom-data/custom-events/collect-custom-attributes/
+    newrelic.recordCustomEvent("testcustomevent", {"test" : "test"});
     await axios.get('http://localhost:3000/');
     return 'API called';
   }
