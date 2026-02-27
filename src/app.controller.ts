@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Logger } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller('/')
@@ -7,6 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): Promise<string> {
+    Logger.log('Handling GET / request');
     return this.appService.getHello();
   }
 
@@ -17,6 +18,7 @@ export class AppController {
 
   @Get('exception')
   throwError(): Promise<void> {
+    Logger.error('Handling GET /exception request');
     return this.appService.throwError();
   }
 
